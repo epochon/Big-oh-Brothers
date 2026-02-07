@@ -1,30 +1,89 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>Smart Farming AI</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-  <h1>🌾 Smart Farming AI Advisor</h1>
+  <!-- Video Background -->
+  <video autoplay muted loop id="video-background">
+    <source src="https://cdn.pixabay.com/video/2021/08/13/84926-584755866_large.mp4" type="video/mp4">
+    Your browser does not support HTML5 video.
+  </video>
+  <div id="video-overlay"></div>
 
-  <label>Crop Name:</label>
-  <input id="crop" placeholder="Rice / Wheat" />
+  <h1>🌾 Smart Farming AI</h1>
 
-  <label>Land Size (acres):</label>
-  <input id="land" type="number" />
+  <div class="container input-box">
+    <h2>✍️ Input Details</h2>
+    <label>Your Name:</label>
+    <input id="username-display" disabled style="background: #e5e7eb; cursor: not-allowed;" />
 
-  <label>Investment (₹):</label>
-  <input id="investment" type="number" />
+    <label>Crop Name:</label>
+    <input id="crop" placeholder="Rice / Wheat" />
 
-  <label>Location:</label>
-  <input id="location" placeholder="Guntur" />
+    <label>Land Size (acres):</label>
+    <input id="land" type="number" />
 
-  <button onclick="submitData()">Get Advice</button>
+    <label>Investment (₹):</label>
+    <input id="investment" type="number" />
 
-  <hr>
-  <h2>🌱 Recommendation</h2>
-  <div id="result"></div>
+    <label>Location:</label>
+    <input id="location" placeholder="Guntur" />
+
+    <hr>
+    <label>📱 Phone Number (For Deal):</label>
+    <input id="phone" type="number" placeholder="Enter 10-digit number" />
+
+    <button onclick="submitData()">Get Advice & Deals 🚀</button>
+  </div>
+
+  <div class="container result-box" id="result-container" style="display:none;">
+    <h2>🌱 Recommendation & Deals</h2>
+    <div id="result"></div>
+  </div>
+
+  <!-- Contract Modal -->
+  <div id="contractModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h2 style="text-align: center; color: #166534; border-bottom: 2px solid #166534; padding-bottom: 10px;">📜
+        OFFICIAL CROP SALE AGREEMENT</h2>
+      <div id="contractText"
+        style="font-family: 'Courier New', Courier, monospace; margin-top: 20px; text-align: left;"></div>
+      <div style="text-align: center; margin-top: 30px;">
+        <button id="sign-btn" onclick="saveContract()" style="width: auto; background: #166534;">Accept & Sign Digitally
+          ✍️</button>
+      </div>
+    </div>
+  </div>
 
   <script src="script.js"></script>
+  <script>
+    // Auto-fill name if logged in
+    document.addEventListener('DOMContentLoaded', () => {
+      const user = JSON.parse(localStorage.getItem("farmerUser"));
+      if (user) {
+        document.getElementById("username-display").value = user.name;
+        if (!document.getElementById("location").value) {
+          document.getElementById("location").value = user.location;
+        }
+      }
+    });
+
+    function closeModal() {
+      document.getElementById("contractModal").style.display = "none";
+    }
+
+    // Close modal if clicked outside
+    window.onclick = function (event) {
+      if (event.target == document.getElementById("contractModal")) {
+        closeModal();
+      }
+    }
+  </script>
 </body>
+
 </html>
