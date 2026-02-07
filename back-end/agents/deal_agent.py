@@ -13,11 +13,16 @@ def deal_agent(data):
     Input: Crop, Land Size, Location.
     Output: JSON with buyer offers and breakdown.
     """
+    # Handle defaults
+    crop = data.get('crop') or "Rice"
+    land = data.get('land') or "5"
+    location = data.get('location') or "India"
+
     prompt = f"""
     Act as a Crop Market Broker. Analyze these details:
-    Crop: {data.get('crop')}
-    Land Size: {data.get('land')} acres
-    Location: {data.get('location')}
+    Crop: {crop}
+    Land Size: {land} acres
+    Location: {location}
 
     STRICT OUTPUT RULES:
     1. Identify 3 specific potential buyers for this region (e.g., ITC, Reliance, Local Mandi).
