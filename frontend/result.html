@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Result</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h2>🌱 Farming Recommendation</h2>
+  <div id="result"></div>
+
+  <script>
+    const data = JSON.parse(localStorage.getItem("result"));
+    document.getElementById("result").innerHTML = `
+      <p><b>Weather:</b> ${data.weather}</p>
+      <p><b>Market:</b> ${data.market}</p>
+      <p><b>Soil:</b> ${data.soil}</p>
+      <p><b>Risk:</b> ${data.risk}</p>
+      <h3>✅ Final Advice: ${data.decision}</h3>
+    `;
+  </script>
+</body>
+</html>
